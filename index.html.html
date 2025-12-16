@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$PRIV - Privilege Coin | Merit Over Identity</title>
+    <meta name="description" content="The movement for true equality. Privilege is earned, not assigned. Join the $PRIV community.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --white: #FAFAFA;
+            --black: #0A0A0A;
+            --gold: #C9A227;
+            --gold-light: #E8D48A;
+            --gold-dark: #8B7019;
+            --gray: #6B6B6B;
+            --gray-light: #E5E5E5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Instrument Sans', -apple-system, sans-serif;
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.02em;
+            line-height: 1.1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: var(--black);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            background: var(--white);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(201, 162, 39, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(201, 162, 39, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-icon {
+            width: 180px;
+            height: 180px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero h1 {
+            font-size: clamp(4rem, 12vw, 10rem);
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .hero-tagline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--black);
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        .ca-box {
+            background: var(--black);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.8s forwards;
+        }
+
+        .ca-box:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+
+        .ca-box .label {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .ca-box .copy-icon {
+            width: 18px;
+            height: 18px;
+            opacity: 0.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 1s forwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--black);
+            border: 2px solid var(--black);
+        }
+
+        .btn-secondary:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Mission Section */
+        .mission {
+            background: var(--black);
+            color: var(--white);
+            max-width: 100%;
+            padding: 6rem 2rem;
+        }
+
+        .mission-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .mission .section-title {
+            color: var(--gold);
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .mission-card {
+            padding: 2rem;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .mission-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .mission-card h3 {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .mission-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+
+        /* Story Section */
+        .story {
+            background: var(--white);
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .story-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .story-image svg {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+        }
+
+        .story-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold-dark);
+        }
+
+        .story-text p {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .credentials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .credential {
+            background: var(--gray-light);
+            padding: 0.5rem 1rem;
+            border-radius: 2px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        /* Fox News Section */
+        .media {
+            background: linear-gradient(180deg, var(--white) 0%, var(--gray-light) 100%);
+            text-align: center;
+        }
+
+        .media .section-title span {
+            color: var(--gold);
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .media-quote {
+            margin-top: 3rem;
+            font-style: italic;
+            color: var(--gray);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* How to Buy Section */
+        .buy {
+            background: var(--white);
+        }
+
+        .buy-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .buy-step {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.3;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .buy-step h3 {
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .buy-step p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .buy-step a {
+            color: var(--gold-dark);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .buy-step a:hover {
+            text-decoration: underline;
+        }
+
+        /* Links/Community Section */
+        .community {
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+            max-width: 100%;
+        }
+
+        .community .section-title {
+            color: var(--white);
+        }
+
+        .community .section-title span {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            font-size: 0.85rem;
+        }
+
+        footer .disclaimer {
+            max-width: 800px;
+            margin: 1rem auto 0;
+            font-size: 0.75rem;
+            line-height: 1.6;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .hero-icon {
+                width: 120px;
+                height: 120px;
+            }
+
+            .ca-box {
+                font-size: 0.7rem;
+                padding: 0.75rem 1rem;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .story-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .story-image {
+                order: -1;
+            }
+
+            .story-image svg {
+                max-width: 200px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">$<span>PRIV</span></a>
+        <ul class="nav-links">
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#story">Story</a></li>
+            <li><a href="#media">Media</a></li>
+            <li><a href="#buy">How to Buy</a></li>
+            <li><a href="#community">Community</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Minimalist Face Icon -->
+        <svg class="hero-icon" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="95" stroke="#0A0A0A" stroke-width="2"/>
+            <ellipse cx="100" cy="85" rx="45" ry="55" stroke="#0A0A0A" stroke-width="2"/>
+            <circle cx="85" cy="75" r="4" fill="#0A0A0A"/>
+            <circle cx="115" cy="75" r="4" fill="#0A0A0A"/>
+            <path d="M85 100 Q100 115 115 100" stroke="#0A0A0A" stroke-width="2" fill="none"/>
+            <path d="M70 55 Q100 35 130 55" stroke="#0A0A0A" stroke-width="2" fill="none"/>
+            <line x1="100" y1="85" x2="100" y2="95" stroke="#0A0A0A" stroke-width="2"/>
+            <!-- Looking into distance effect -->
+            <path d="M140 70 L180 50" stroke="#C9A227" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6"/>
+            <path d="M140 80 L190 75" stroke="#C9A227" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.4"/>
+            <path d="M140 90 L185 100" stroke="#C9A227" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.3"/>
+        </svg>
+
+        <h1>PRIVILEGE <span>COIN</span></h1>
+        <p class="hero-subtitle">$PRIV</p>
+        <p class="hero-tagline">Merit Over Identity</p>
+        
+        <div class="ca-box" onclick="copyCA()">
+            <span class="label">CA:</span>
+            <span id="contract-address">TBA - LAUNCHING SOON</span>
+            <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+        </div>
+
+        <div class="hero-buttons">
+            <a href="#buy" class="btn btn-primary">How to Buy</a>
+            <a href="#mission" class="btn btn-secondary">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission" id="mission">
+        <div class="mission-inner">
+            <h2 class="section-title">THE MISSION</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.7);">
+                United by Humanity, Not Divided by Labels
+            </p>
+
+            <div class="mission-grid">
+                <div class="mission-card fade-in">
+                    <h3>EQUALITY, NOT EQUITY</h3>
+                    <p>We believe in treating people based on their character, effort, and merit—not their identity. True equality means equal opportunity, not equal outcomes mandated by quotas.</p>
+                </div>
+                <div class="mission-card fade-in">
+                    <h3>UNITY OVER DIVISION</h3>
+                    <p>Media and institutions profit from keeping us divided. We choose conversation over conflict, understanding over accusations. If we don't talk, we fight.</p>
+                </div>
+                <div class="mission-card fade-in">
+                    <h3>PRIVILEGE IS EARNED</h3>
+                    <p>Real privilege comes from hard work, sacrifice, and the choices we make—not the color of our skin. Class, not race, is the true divider. Poverty doesn't discriminate.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story" id="story">
+        <h2 class="section-title">THE FOUNDER</h2>
+        <p class="section-subtitle">A lifetime of service. A message that needs to be heard.</p>
+
+        <div class="story-content">
+            <div class="story-image">
+                <!-- Minimalist silhouette looking into distance -->
+                <svg viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="400" fill="none"/>
+                    <!-- Head and shoulders silhouette -->
+                    <ellipse cx="150" cy="120" rx="55" ry="70" stroke="#0A0A0A" stroke-width="2" fill="none"/>
+                    <!-- Shoulders -->
+                    <path d="M60 280 Q150 200 240 280" stroke="#0A0A0A" stroke-width="2" fill="none"/>
+                    <path d="M60 280 L60 400" stroke="#0A0A0A" stroke-width="2"/>
+                    <path d="M240 280 L240 400" stroke="#0A0A0A" stroke-width="2"/>
+                    <!-- Facial features - looking right -->
+                    <circle cx="165" cy="105" r="5" fill="#0A0A0A"/>
+                    <path d="M175 125 L185 120" stroke="#0A0A0A" stroke-width="2"/>
+                    <path d="M140 145 Q160 155 175 145" stroke="#0A0A0A" stroke-width="2" fill="none"/>
+                    <!-- Vision lines going into distance -->
+                    <path d="M185 105 L280 70" stroke="#C9A227" stroke-width="2" stroke-dasharray="6 6" opacity="0.5"/>
+                    <path d="M185 115 L290 100" stroke="#C9A227" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.35"/>
+                    <path d="M185 125 L275 130" stroke="#C9A227" stroke-width="1" stroke-dasharray="6 6" opacity="0.2"/>
+                    <!-- Decorative gold accent -->
+                    <circle cx="150" cy="320" r="25" stroke="#C9A227" stroke-width="1" fill="none" opacity="0.3"/>
+                    <circle cx="150" cy="320" r="35" stroke="#C9A227" stroke-width="0.5" fill="none" opacity="0.2"/>
+                </svg>
+            </div>
+
+            <div class="story-text fade-in">
+                <h3>30 Years in the Trenches</h3>
+                <p>
+                    For three decades, he stood in gymnasiums and classrooms across Title I schools—institutions where every student received free breakfast and lunch because their families couldn't afford it. He coached varsity basketball, taught PE and Health, and watched thousands of young people grow into adults.
+                </p>
+                <p>
+                    He created free camps for underprivileged youth. He bought "College" shirts and paid for university tours out of his own pocket. He believed in the mission: lift people up through opportunity, not handouts.
+                </p>
+                <p>
+                    Then he saw the system change. Merit was replaced by quotas. Excellence was sacrificed for optics. He was asked to pledge allegiance to ideologies that judged him—not by his three decades of service—but by his skin color and gender.
+                </p>
+                <p>
+                    This token is his response. Not with anger, but with purpose. Not to divide, but to unite around a simple truth: <strong>we should be judged by our decisions and efforts, not our identity.</strong>
+                </p>
+
+                <div class="credentials">
+                    <span class="credential">30 Years Teaching</span>
+                    <span class="credential">Doctorate in Education</span>
+                    <span class="credential">Varsity Basketball Coach</span>
+                    <span class="credential">Title I Schools</span>
+                    <span class="credential">Family Man</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Section -->
+    <section class="media" id="media">
+        <h2 class="section-title">THEY SAID <span>IT COULDN'T BE DONE</span></h2>
+        <p class="section-subtitle">
+            Fox News called pump.fun a platform for "pump and dump schemes." 
+            We're here to prove that tokenized attention can be a force for real conversation.
+        </p>
+
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/oj2HaNGnhQ0" 
+                title="Fox News Segment" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <p class="media-quote">
+            "They see speculation. We see a new form of expression—where attention becomes currency, 
+            and movements can form on-chain."
+        </p>
+    </section>
+
+    <!-- How to Buy Section -->
+    <section class="buy" id="buy">
+        <h2 class="section-title">HOW TO BUY</h2>
+        <p class="section-subtitle">New to crypto? Here's how to join the movement in 4 simple steps.</p>
+
+        <div class="buy-steps">
+            <div class="buy-step fade-in">
+                <span class="step-number">01</span>
+                <h3>GET A WALLET</h3>
+                <p>Download <a href="https://phantom.app" target="_blank">Phantom Wallet</a> on your phone or browser. This is where you'll store your $PRIV tokens.</p>
+            </div>
+            <div class="buy-step fade-in">
+                <span class="step-number">02</span>
+                <h3>BUY SOLANA</h3>
+                <p>Purchase SOL through your Phantom wallet, Coinbase, or any major exchange. Then transfer it to your Phantom wallet.</p>
+            </div>
+            <div class="buy-step fade-in">
+                <span class="step-number">03</span>
+                <h3>COPY THE CA</h3>
+                <p>Copy the Contract Address (CA) from the top of this page. This is the unique identifier for $PRIV on the Solana blockchain.</p>
+            </div>
+            <div class="buy-step fade-in">
+                <span class="step-number">04</span>
+                <h3>SWAP FOR $PRIV</h3>
+                <p>Go to <a href="https://jup.ag" target="_blank">Jupiter</a> or <a href="https://raydium.io" target="_blank">Raydium</a>, paste the CA, and swap your SOL for $PRIV. Welcome to the movement.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community" id="community">
+        <h2 class="section-title">JOIN THE <span>MOVEMENT</span></h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.7);">
+            Follow us for updates, discussions, and community events.
+        </p>
+
+        <div class="social-links">
+            <a href="#" class="social-link" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                Follow on X
+            </a>
+            <a href="#" class="social-link" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+                Pump.fun
+            </a>
+            <a href="#" class="social-link" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 3h18v18H3V3zm16.5 16.5v-6.75h-2.25v6.75h2.25zm-7.5 0V9.75H9.75v9.75H12zm-4.5 0v-3.75H5.25v3.75H7.5z"/>
+                </svg>
+                DEXScreener
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>$PRIV - Privilege Coin © 2025 | Merit Over Identity</p>
+        <p class="disclaimer">
+            $PRIV is a community-driven memecoin with no intrinsic value or expectation of financial return. 
+            This is not financial advice. Always do your own research. 
+            The token exists to facilitate discussion and community building around the concept of merit-based equality.
+        </p>
+    </footer>
+
+    <script>
+        // Copy CA functionality
+        function copyCA() {
+            const ca = document.getElementById('contract-address').textContent;
+            if (ca !== 'TBA - LAUNCHING SOON') {
+                navigator.clipboard.writeText(ca);
+                const caBox = document.querySelector('.ca-box');
+                const originalText = document.getElementById('contract-address').textContent;
+                document.getElementById('contract-address').textContent = 'COPIED!';
+                setTimeout(() => {
+                    document.getElementById('contract-address').textContent = originalText;
+                }, 1500);
+            }
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
